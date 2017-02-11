@@ -17,7 +17,12 @@ var spotify = require('spotify');
 
 // The switch-case will direct which function gets run.
 switch (action) {
-  case "my-tweets":
+
+  case "do-what-it-says":
+    random();
+    break;
+
+    case "my-tweets":
     tweets();
     break;
 
@@ -29,9 +34,7 @@ switch (action) {
     movie();
     break;
 
-  case "do-what-it-says":
-    random();
-    break;
+  
 }
 
 function tweets(){
@@ -127,5 +130,17 @@ function movie(){
   }  
 }
 function random(){
+  fs.readFile("random.txt", "utf8", function(error, data) {
 
+   // Then split it by commas (to make it more readable)
+  var dataArr = data.split(",");
+
+  // We will then re-display the content as an array for later use.
+  //console.log(dataArr);
+  action = dataArr[0];
+  //console.log("action is " + action);
+  value = dataArr[1];
+  spotifySong();
+
+});
 }
