@@ -1,19 +1,12 @@
 // Load the fs package to read and write
 var fs = require("fs");
-
 var request = require('request');
-
-
-// Take two arguments.
-// The first will be the action (i.e. "deposit", "withdraw", etc.)
-// The second will be the amount that will be added, withdrawn, etc.
-var action = process.argv[2];
-var value = process.argv[3];
-
 var Twitter = require('twitter');
 var spotify = require('spotify');
- 
 
+// Take two arguments.
+var action = process.argv[2];
+var value = process.argv[3];
 
 // The switch-case will direct which function gets run.
 switch (action) {
@@ -32,9 +25,7 @@ switch (action) {
 
   case "movie-this":
     movie();
-    break;
-
-  
+    break;  
 }
 
 function tweets(){
@@ -89,14 +80,12 @@ function movie(){
       'User-Agent': 'request'
     }
   };
-
   var options2 = {
     url: 'http://www.omdbapi.com/?t=Mr.+Nobody&y=&plot=short&r=json&tomatoes=true',
     headers: {
       'User-Agent': 'request'
     }
   };
-
   if(value){
     request(options, function (error, response, body) {
       if (!error && response.statusCode == 200) {
@@ -131,16 +120,13 @@ function movie(){
 }
 function random(){
   fs.readFile("random.txt", "utf8", function(error, data) {
-
-   // Then split it by commas (to make it more readable)
-  var dataArr = data.split(",");
-
-  // We will then re-display the content as an array for later use.
-  //console.log(dataArr);
-  action = dataArr[0];
-  //console.log("action is " + action);
-  value = dataArr[1];
-  spotifySong();
-
-});
+    // Then split it by commas (to make it more readable)
+    var dataArr = data.split(",");
+    // We will then re-display the content as an array for later use.
+    //console.log(dataArr);
+    action = dataArr[0];
+    //console.log("action is " + action);
+    value = dataArr[1];
+    spotifySong();
+  });
 }
